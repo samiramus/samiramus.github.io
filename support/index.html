@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>App Support - Workout Notebook</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: #333;
+}
+.container {
+    max-width: 600px;
+    text-align: center;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+h1 {
+    color: #0078d4;
+}
+p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-top: 0;
+}
+.email-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #0078d4;
+    text-decoration: none;
+    font-weight: bold;
+}
+.email-link:hover {
+    text-decoration: underline;
+}
+</style>
+<script>
+fetch('https://samiramus.github.io/credentials.txt')
+    .then(response => response.text())
+    .then(text => {
+        let lines = text.split('\n');
+        let credentials = {};
+        lines.forEach(line => {
+            let parts = line.split('=');
+            if (parts.length === 2) {
+                credentials[parts[0].trim()] = parts[1].trim();
+            }
+        });
+        document.title = `App Support - ${credentials.APP_NAME || 'Workout Notebook'}`;
+        document.getElementById('app-name').textContent = credentials.APP_NAME || 'Workout Notebook';
+        document.getElementById('support-email').href = `mailto:${credentials.EMAIL || 'support@yourapp.com'}`;
+        document.getElementById('support-email').textContent = credentials.EMAIL || 'support@yourapp.com';
+    })
+    .catch(error => console.error('Error loading credentials:', error));
+</script>
+</head>
+<body>
+<div class="container">
+    <h1>Support for <span id="app-name">Workout Notebook</span></h1>
+    <p>If you need any assistance or have questions about our app, we're here to help! Feel free to reach out via email, and we'll get back to you as soon as possible.</p>
+    <a id="support-email" class="email-link" href="mailto:support@yourapp.com">Contact Support</a>
+</div>
+</body>
+</html>
