@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width'>
+<title>Terms & Conditions</title>
+<style> body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; padding:1em; } </style>
+<script>
+async function loadCredentials() {
+    try {
+        const response = await fetch('https://samiramus.github.io/credentials.txt');
+        const text = await response.text();
+        const credentials = Object.fromEntries(text.split('\n').map(line => line.split('=')));
+        
+        document.getElementById('app-name').textContent = credentials.APP_NAME || 'Application';
+        document.getElementById('developer-name').textContent = credentials.DEVELOPER_NAME || 'Service Provider';
+        document.getElementById('support-email').textContent = credentials.EMAIL || 'support@example.com';
+        document.getElementById('support-email').href = 'mailto:' + (credentials.EMAIL || 'support@example.com');
+    } catch (error) {
+        console.error('Error loading credentials:', error);
+    }
+}
+window.onload = loadCredentials;
+</script>
+</head>
+<body>
+<strong>Terms & Conditions</strong><br>
+<p>These terms and conditions apply to the <span id='app-name'>Application</span> app (hereby referred to as "Application") for mobile devices that was created by <span id='developer-name'>Service Provider</span> (hereby referred to as "Service Provider") as a Freemium service.</p><br>
+<p>Upon downloading or utilizing the Application, you are automatically agreeing to the following terms...</p>
+<!-- Оставшаяся часть оригинального текста без изменений -->
+<strong>Contact Us</strong>
+<p>If you have any questions or suggestions about the Terms and Conditions, please do not hesitate to contact the Service Provider at <a id='support-email' href='#'>support@example.com</a>.</p>
+<hr>
+</body>
+</html>
